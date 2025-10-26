@@ -1,15 +1,35 @@
 import React from 'react';
 
 // Simple uncontrolled form: read values directly from the submit event
-function Users({ onSubmit }) {
+function Users() {
 	function handleSubmit(e) {
 		e.preventDefault();
-		const form = e.target;
-		const name = form.elements?.name?.value ?? '';
-		const email = form.elements?.email?.value ?? '';
-		const values = { name, email };
-		console.log(values);
-		if (typeof onSubmit === 'function') onSubmit(values);
+		// const form = e.target;
+		const name = e.target.name.value ?? '2';
+		const email = e.target.email.value ?? '2';
+		const newUser= { name, email };
+		console.log(newUser);
+
+
+        // create user in db 
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log('data after creating in the db', data);
+            if(data.insertedId){
+                alert('User created successfully');
+                e.target.reset();
+            }
+            
+        })
+		
 	}
 
 	return (
