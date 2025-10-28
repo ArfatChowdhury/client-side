@@ -1,4 +1,5 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, } from 'react';
+import { Link } from 'react-router';
 
 
 
@@ -102,6 +103,8 @@ function Users() {
 							<p>Name: {user.name}</p>
 							<p>Email: {user.email}</p>
 							<button onClick={() => handleDelete(user._id)}>Delete</button>
+							<Link to={`/users/${user._id}`}>Details</Link>
+							<Link to={`/users/${user._id}`}>Edit</Link>
 						</div>
 					))}
 				</ul>
