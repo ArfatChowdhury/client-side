@@ -59,57 +59,58 @@ function Users() {
 		})
 			.then(res => res.json())
 			.then(data => {
-				if(data.deletedCount){
+				if (data.deletedCount) {
 					fetchUsers()
 					// const remainingUsers = users.filter(user => user._id !== id)
 					// setUsers(remainingUsers);
 					console.log('data after deleting from the db', data);
 				}
-			})}
-
-
-		return (
-
-			<div>
-				<form id="user-form" onSubmit={handleSubmit}>
-					<div style={{ marginBottom: 8 }}>
-						<label htmlFor="name">Name</label>
-						<br />
-						<input
-							id="name"
-							name="name"
-							placeholder="Your name"
-						/>
-					</div>
-
-					<div style={{ marginBottom: 8 }}>
-						<label htmlFor="email">Email</label>
-						<br />
-						<input
-							id="email"
-							name="email"
-							type="email"
-							placeholder="you@example.com"
-						/>
-					</div>
-
-					<button type="submit">Submit</button>
-				</form>
-				<p>Total users: {users.length}</p>
-				<ul>
-					{users.map(user => (
-						<div key={user._id} style={{ marginBottom: 16 }}	>
-							<p>{user._id}</p>
-							<p>Name: {user.name}</p>
-							<p>Email: {user.email}</p>
-							<button onClick={() => handleDelete(user._id)}>Delete</button>
-							<Link to={`/users/${user._id}`}>Details</Link>
-							<Link to={`/users/${user._id}`}>Edit</Link>
-						</div>
-					))}
-				</ul>
-			</div>
-		);
+			})
 	}
 
-	export default Users;
+
+	return (
+
+		<div>
+			<form id="user-form" onSubmit={handleSubmit}>
+				<div style={{ marginBottom: 8 }}>
+					<label htmlFor="name">Name</label>
+					<br />
+					<input
+						id="name"
+						name="name"
+						placeholder="Your name"
+					/>
+				</div>
+
+				<div style={{ marginBottom: 8 }}>
+					<label htmlFor="email">Email</label>
+					<br />
+					<input
+						id="email"
+						name="email"
+						type="email"
+						placeholder="you@example.com"
+					/>
+				</div>
+
+				<button type="submit">Submit</button>
+			</form>
+			<p>Total users: {users.length}</p>
+			<ul>
+				{users.map(user => (
+					<div key={user._id} style={{ marginBottom: 16 }}	>
+						<p>{user._id}</p>
+						<p>Name: {user.name}</p>
+						<p>Email: {user.email}</p>
+						<button onClick={() => handleDelete(user._id)}>Delete</button>
+						<Link to={`/users/${user._id}`}>Details</Link>
+						<Link to={`/update/${user._id}`}>Edit</Link>
+					</div>
+				))}
+			</ul>
+		</div>
+	);
+}
+
+export default Users;
